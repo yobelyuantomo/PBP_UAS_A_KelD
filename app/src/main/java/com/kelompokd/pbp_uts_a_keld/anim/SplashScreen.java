@@ -12,7 +12,8 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.kelompokd.pbp_uts_a_keld.MainActivity;
+import com.kelompokd.pbp_uts_a_keld.HomeActivity;
+import com.kelompokd.pbp_uts_a_keld.LoginActivity;
 import com.kelompokd.pbp_uts_a_keld.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashScreen.this, MainActivity.class);
+                Intent mainIntent = new Intent(SplashScreen.this, LoginActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(mainIntent);
                 finish();
