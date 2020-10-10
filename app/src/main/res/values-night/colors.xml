@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#fdb24e</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryDark">#171717</color>
     <color name="colorYellow">#fdb24e</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colortWhite">#CCCCCC</color>
-    <color name="textColor">#808080</color>
+    <color name="textColor">#FFFFFF</color>
     <color name="textColor2">#000000</color>
-    <color name="textColor3">#000000</color>
+    <color name="textColor3">#FFFFFF</color>
 </resources>
