@@ -1,12 +1,17 @@
 package com.kelompokd.pbp_uts_a_keld;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -15,7 +20,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setUpNavigation();
+
+        // Ini untuk pesan notif Firevase
+        FirebaseMessaging.getInstance().subscribeToTopic("news")
+            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
     }
+
+    // Fungsi ini untuk navigasi di button nav
     public void setUpNavigation(){
         bottomNavigationView =findViewById(R.id.bttm_nav);
         NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager()

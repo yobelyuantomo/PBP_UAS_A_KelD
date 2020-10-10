@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "625844664140",
+    "firebase_url": "https://pbputsakeld.firebaseio.com",
+    "project_id": "pbputsakeld",
+    "storage_bucket": "pbputsakeld.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625844664140:android:4cc9c12aca8bc83a3e41e9",
+        "android_client_info": {
+          "package_name": "com.kelompokd.pbp_uts_a_keld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625844664140-6t2tb08ngsj0cbskhnj7iqbmd0770cou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kelompokd.pbp_uts_a_keld",
+            "certificate_hash": "5cedae14c1a411a21acffcfd9be5da24564d3650"
+          }
+        },
+        {
+          "client_id": "625844664140-21j69hihoiuirpcc2snf2jngnesuqd2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVhrZGESlJdjDm5qF6AeieBM1F1gFQAJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625844664140-21j69hihoiuirpcc2snf2jngnesuqd2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

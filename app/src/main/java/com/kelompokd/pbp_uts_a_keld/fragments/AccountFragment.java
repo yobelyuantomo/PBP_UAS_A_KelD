@@ -84,6 +84,8 @@ public class AccountFragment extends Fragment {
 
         // Firebase Upload Image Profile
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Ini berfungsi untuk menampilkan image yang telah di download dari firebase storage ke image view
         if(user != null){
             if(user.getPhotoUrl() != null){
                 Glide.with(getActivity())
@@ -116,6 +118,7 @@ public class AccountFragment extends Fragment {
         return root;
     }
 
+    // Fungsi ini akan menjalankan alert dialog untuk memilih mau lewat kamera atau external storage
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -147,6 +150,7 @@ public class AccountFragment extends Fragment {
         builder.show();
     }
 
+    // Ambil dari Gallery
     private void pickImageFromGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -170,6 +174,7 @@ public class AccountFragment extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
+    // Ini fungsi untuk menampilkan pop up sebelum logout
     private void logoutPopup() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setMessage("Are you sure?")
@@ -186,6 +191,7 @@ public class AccountFragment extends Fragment {
         alert1.show();
     }
 
+    // Fungsi untuk logout
     public void logout(){
         FirebaseAuth.getInstance().signOut();
         createNotificationChannel();
@@ -220,6 +226,7 @@ public class AccountFragment extends Fragment {
         manager.notify(0, builder.build());
     }
 
+    // Fungsi buat buka kamera kalau mau ubah foto profil langsung dengan kamera
     private void  takePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -284,6 +291,7 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    // Ini fungsi untuk mengupload foto yang diambil dengan kamera ke Firebase Storage
     private void handleUpload(Bitmap bitmap){
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
@@ -315,6 +323,7 @@ public class AccountFragment extends Fragment {
                 });
     }
 
+    //Ini fungsi untuk mengambil data dari firebase storage untuk kemudian ditampilkan di imageview
     private  void getDownloadUrl(StorageReference reference){
         reference.getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {

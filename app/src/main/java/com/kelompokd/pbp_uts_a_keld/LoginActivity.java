@@ -117,6 +117,8 @@ public class LoginActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+    // Fungsi ini akan membuat notif pada saat login
     private  void notifLogin(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
