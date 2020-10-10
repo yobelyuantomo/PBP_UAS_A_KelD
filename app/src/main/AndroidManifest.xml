@@ -3,6 +3,7 @@
     package="com.kelompokd.pbp_uts_a_keld">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"

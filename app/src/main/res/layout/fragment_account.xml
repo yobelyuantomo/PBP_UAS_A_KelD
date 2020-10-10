@@ -59,25 +59,26 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/image_acc_layout"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:orientation="horizontal">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_acc_view"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center|top"
-                    android:src="@drawable/ic_baseline_account_circle_24"
-                    app:tint="@color/textColor" />
+                    android:src="@drawable/ic_baseline_account_circle_24"/>
 
-                <com.google.android.material.imageview.ShapeableImageView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="10dp"
                     android:src="@drawable/ic_baseline_edit_24" />
 
             </RelativeLayout>
@@ -119,7 +120,7 @@
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                               android:textColor="@color/textColor3"
-                             android:text="Yohanes Yobel Yuantomo"/>
+                             android:text="Tubes PBP A Kelompok D"/>
 
                          <com.google.android.material.textview.MaterialTextView
                              android:layout_width="match_parent"
@@ -248,7 +249,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                  android:textColor="@color/textColor3"
-                                android:text="yobelyuantomo@gmail.com"/>
+                                android:text="tubespbpakeld@gmail.com"/>
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="match_parent"
