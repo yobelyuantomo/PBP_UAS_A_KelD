@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
             homeIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(homeIntent);
+            finish();
         }
 
         //When Sign In Clicked
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                             homeIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(homeIntent);
+                            finish();
                         }
                         else{
                             Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -132,5 +134,4 @@ public class LoginActivity extends AppCompatActivity {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
     }
-
 }

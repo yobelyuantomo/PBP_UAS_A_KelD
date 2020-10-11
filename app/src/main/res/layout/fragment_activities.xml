@@ -6,174 +6,239 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ActivitiesFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:fillViewport="false">
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/header"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorYellow"
-            android:layout_alignParentTop="true">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/back_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:tint="@color/textColor2"
-                    android:backgroundTint="@color/colorYellow"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
-                    android:layout_gravity="center"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Activities"
-                    android:textColor="@color/textColor2"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginVertical="15dp"
-                    android:textSize="20dp"/>
-
-            </LinearLayout>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center"
-                android:padding="0dp"
-                android:src="@drawable/account_circle"
-                android:layout_margin="10dp"
-                android:backgroundTint="@color/colorYellow"/>
-
-        </com.google.android.material.navigation.NavigationView>
-
-        <GridLayout
-            android:id="@+id/grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="1"
-            android:layout_marginTop="10dp">
-
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:id="@+id/sewa_activities"
-                android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="8dp">
-
-               <LinearLayout
-                   android:id="@+id/sewa_mobil"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:orientation="horizontal">
-
-                   <com.google.android.material.imageview.ShapeableImageView
-                       android:layout_width="60dp"
-                       android:layout_height="60dp"
-                       android:layout_margin="10dp"
-                       android:src="@drawable/rent"
-                       android:layout_gravity="center"/>
-
-                  <LinearLayout
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical">
-
-                      <com.google.android.material.textview.MaterialTextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="Sewa Mobil"
-                          android:textStyle="bold"
-                          android:textColor="@color/textColor"
-                          android:textSize="20dp"
-                          android:layout_marginHorizontal="10dp"
-                          android:layout_marginTop="10dp"
-                          android:textAlignment="center" />
-
-                      <com.google.android.material.textview.MaterialTextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="Segera pesan mobilmu dan rasakan penawaran menarik hanya di MoRent!"
-                          android:textSize="14dp"
-                          android:textColor="@color/textColor"
-                          android:layout_marginHorizontal="10dp"
-                          android:layout_marginTop="5dp"
-                          android:layout_marginBottom="15dp"
-                          android:textAlignment="textStart" />
-
-                  </LinearLayout>
-
-               </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="8dp">
+                android:backgroundTint="@color/colorYellow"
+                android:layout_alignParentTop="true">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/list"
-                        android:layout_gravity="center"/>
-
-                    <LinearLayout
+                    <ImageButton
+                        android:id="@+id/back_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Lihat Pesanan"
-                            android:textColor="@color/textColor"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginTop="10dp"
-                            android:textAlignment="center" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textColor"
-                            android:text="Lihat pesanan yang anda buat disini dan pastikan semua telah sesuai!"
-                            android:textSize="14dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="15dp"
-                            android:textAlignment="textStart" />
-
-                    </LinearLayout>
+                        android:layout_marginLeft="10dp"
+                        android:tint="@color/textColor2"
+                        android:backgroundTint="@color/colorYellow"
+                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        android:layout_gravity="center"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activities"
+                        android:textColor="@color/textColor2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginVertical="15dp"
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:padding="0dp"
+                    android:id="@+id/account_settings_corner"
+                    android:src="@drawable/account_circle"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="@color/colorYellow"/>
 
-        </GridLayout>
-    </LinearLayout>
+            </com.google.android.material.navigation.NavigationView>
+
+            <GridLayout
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:layout_marginTop="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:id="@+id/sewa_activities"
+                    android:layout_rowWeight="1"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/sewa_mobil"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/rent"
+                            android:layout_gravity="center"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sewa Mobil"
+                                android:textStyle="bold"
+                                android:textColor="@color/textColor"
+                                android:textSize="20dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Segera pesan mobilmu dan rasakan penawaran menarik hanya di MoRent!"
+                                android:textSize="14dp"
+                                android:textColor="@color/textColor"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="15dp"
+                                android:textAlignment="textStart" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/wishlist"
+                            android:layout_gravity="center"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Wishlist"
+                                android:textColor="@color/textColor"
+                                android:textStyle="bold"
+                                android:textSize="20dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textColor"
+                                android:text="Lihat daftar wishlist anda disini"
+                                android:textSize="14dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="15dp"
+                                android:textAlignment="textStart" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/list"
+                            android:layout_gravity="center"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lihat Pesanan"
+                                android:textColor="@color/textColor"
+                                android:textStyle="bold"
+                                android:textSize="20dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textColor"
+                                android:text="Lihat status pemesanan anda disini"
+                                android:textSize="14dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="15dp"
+                                android:textAlignment="textStart" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

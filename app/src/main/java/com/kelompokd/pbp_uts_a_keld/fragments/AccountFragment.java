@@ -80,6 +80,7 @@ public class AccountFragment extends Fragment {
         ImageButton back_btn = root.findViewById(R.id.back_btn);
         RelativeLayout image_acc_layout = root.findViewById(R.id.image_acc_layout);
 
+        ImageButton acc_setting_corner = root.findViewById(R.id.account_settings_corner);
         image_acc_view = root.findViewById(R.id.image_acc_view);
 
         // Firebase Upload Image Profile
@@ -112,6 +113,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectImage();
+            }
+        });
+
+        acc_setting_corner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_acc_settings);
             }
         });
 
@@ -196,7 +204,11 @@ public class AccountFragment extends Fragment {
         FirebaseAuth.getInstance().signOut();
         createNotificationChannel();
         notifLogout();
-        startActivity(new Intent(getContext(), LoginActivity.class));
+
+        Intent intent = new Intent(getContext(), LoginActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void createNotificationChannel(){

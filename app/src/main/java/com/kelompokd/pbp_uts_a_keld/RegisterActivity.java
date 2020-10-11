@@ -88,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                             homeIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(homeIntent);
+                            finish();
                         }
                         else{
                             Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();

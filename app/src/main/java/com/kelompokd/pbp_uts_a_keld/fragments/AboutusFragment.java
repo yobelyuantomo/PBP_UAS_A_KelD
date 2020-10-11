@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
@@ -17,12 +18,6 @@ import com.kelompokd.pbp_uts_a_keld.R;
 import com.kelompokd.pbp_uts_a_keld.SliderAdapter;
 
 public class AboutusFragment extends Fragment {
-
-    private ViewPager sViewPager;
-    private LinearLayout dotsLayout;
-    private TextView dots[];
-
-    SliderAdapter sliderAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,67 +29,22 @@ public class AboutusFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_aboutus, container, false);
 
-        sViewPager = root.findViewById(R.id.sViewPager);
-        dotsLayout = root.findViewById(R.id.layoutDots);
-
-        // create Adapter object
-        sliderAdapter = new SliderAdapter(getContext());
-        // set adapter in ViewPager
-        sViewPager.setAdapter(sliderAdapter);
-        // set PageChangeListener
-        sViewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-        // adding bottom dots -> addBottomDots(0);
-//      addDotIndicator(0);
-        addBottomDots(0);
-
-
-        ImageButton back_btn = root.findViewById(R.id.back_btn);
-
-        back_btn.setOnClickListener(new View.OnClickListener() {
+        CardView our_teams = root.findViewById(R.id.our_teams);
+        our_teams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(root).navigate(R.id.nav_home);
+                Navigation.findNavController(root).navigate(R.id.nav_our_teams);
+            }
+        });
+
+        CardView our_location = root.findViewById(R.id.our_locations);
+        our_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_our_location);
             }
         });
 
         return root;
-    }
-
-
-    // viewPagerPage ChangeListener according to Dots-Points
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageSelected(int position) {
-            addBottomDots(position);
-        }
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-    };
-
-    // set of Dots points
-    private void addBottomDots(int currentPage) {
-//        dots = new TextView[layouts.length];
-        dots = new TextView[3];
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(getContext());
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.colortWhite));  // dot_inactive
-            dotsLayout.addView(dots[i]);
-        }
-
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(getResources().getColor(R.color.colorYellow)); // dot_active
     }
 }

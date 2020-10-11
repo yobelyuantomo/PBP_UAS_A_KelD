@@ -25,11 +25,19 @@ public class SettingsFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
 
         ImageButton back_btn = root.findViewById(R.id.back_btn);
+        ImageButton acc_setting_corner = root.findViewById(R.id.account_settings_corner);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(root).navigate(R.id.nav_home);
+            }
+        });
+
+        acc_setting_corner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_acc_settings);
             }
         });
 

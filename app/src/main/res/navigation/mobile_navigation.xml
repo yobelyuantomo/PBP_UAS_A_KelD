@@ -71,6 +71,22 @@
         android:id="@+id/nav_acc_settings"
         android:name="com.kelompokd.pbp_uts_a_keld.fragments.AccountFragment"
         android:label="Account"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_nav_acc_settings_to_nav_our_teams"
+            app:destination="@id/nav_our_teams" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_our_teams"
+        android:name="com.kelompokd.pbp_uts_a_keld.fragments.TeamsFragment"
+        android:label="Teams"
+        tools:layout="@layout/fragment_teams"/>
+
+    <fragment
+        android:id="@+id/nav_our_location"
+        android:name="com.kelompokd.pbp_uts_a_keld.fragments.LocationFragment"
+        android:label="Account"
         tools:layout="@layout/fragment_account"/>
 
 </navigation>

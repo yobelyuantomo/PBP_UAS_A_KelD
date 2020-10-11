@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.kelompokd.pbp_uts_a_keld.R;
@@ -28,7 +30,10 @@ public class ThemeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_theme, container, false);
+        final View root = inflater.inflate(R.layout.fragment_theme, container, false);
+
+        ImageButton acc_setting_corner = root.findViewById(R.id.account_settings_corner);
+        ImageButton back_btn = root.findViewById(R.id.back_btn);
 
         imageView = root.findViewById(R.id.imageView);
         switchCompat = root.findViewById(R.id.switchCompat);
@@ -60,6 +65,20 @@ public class ThemeFragment extends Fragment {
                     editor.commit();
 
                 }
+            }
+        });
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_home);
+            }
+        });
+
+        acc_setting_corner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_acc_settings);
             }
         });
 
