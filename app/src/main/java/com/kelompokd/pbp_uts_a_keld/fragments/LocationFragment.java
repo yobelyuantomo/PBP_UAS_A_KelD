@@ -69,13 +69,15 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Pe
 
     private String mapStyle = Style.MAPBOX_STREETS;
     private Point origin;
-    private Point destination = Point.fromLngLat(110.416086, -7.779228);
+    private Point destination;
 
     private DirectionsRoute currentRoute;
     private NavigationMapRoute navigationMapRoute;
     private MapView mapView;
     private MapboxMap mapboxMap;
     private PermissionsManager permissionsManager;
+
+    Button startNav;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,23 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Pe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.fragment_geolocation, container, false);
+
+        View root = inflater.inflate(R.layout.fragment_location, container, false);
+
+        startNav = root.findViewById(R.id.startButton);
+        startNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean simulateRoute = true;
+                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+                        .directionsRoute(currentRoute)
+                        .shouldSimulateRoute(simulateRoute)
+                        .build();
+
+                NavigationLauncher.startNavigation(getActivity(), options);
+            }
+        });
+        return root;
     }
 
     @Override
@@ -142,8 +160,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Pe
 
         GeoJsonSource source = mapboxMap.getStyle().getSourceAs(DESTINATION_SOURCE_ID);
         source.setGeoJson(Feature.fromGeometry(destination));
-
-        getRoute(origin, destination);
     }
 
     private void getRoute(Point origin, Point destination) {
@@ -169,6 +185,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Pe
                         if (navigationMapRoute != null) {
                             navigationMapRoute.removeRoute();
                         } else {
+                            startNav.setEnabled(true);
                             navigationMapRoute = new NavigationMapRoute(null, mapView, mapboxMap, R.style.NavigationMapRoute);
                         }
                         navigationMapRoute.addRoute(currentRoute);
@@ -184,21 +201,15 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Pe
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(new Style.Builder().fromUri(mapStyle), this::onStyleLoaded);
 
-        Button startNav = getActivity().findViewById(R.id.startButton);
-        startNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean simulateRoute = true;
-                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                        .directionsRoute(currentRoute)
-                        .shouldSimulateRoute(simulateRoute)
-                        .build();
-
-                NavigationLauncher.startNavigation(getActivity(), options);
-            }
-        });
+        mapboxMap.setStyle(new Style.Builder().fromUri(Style.MAPBOX_STREETS),
+                new Style.OnStyleLoaded(){
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        enableLocationComponent(style);
+                        initLayers(style);
+                    }
+                });
     }
 
     @SuppressLint("MissingPermission")
@@ -216,6 +227,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Pe
             locationComponent.setRenderMode(RenderMode.COMPASS);
             this.origin = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(),
                     locationComponent.getLastKnownLocation().getLatitude());
+            destination = Point.fromLngLat(110.416086, -7.779228);
+            getRoute(origin, destination);
         }
         else {
             permissionsManager = new PermissionsManager(this);

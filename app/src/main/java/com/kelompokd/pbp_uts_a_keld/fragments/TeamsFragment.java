@@ -33,7 +33,7 @@ public class TeamsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_aboutus, container, false);
+        final View root = inflater.inflate(R.layout.fragment_teams, container, false);
 
         sViewPager = root.findViewById(R.id.sViewPager);
         dotsLayout = root.findViewById(R.id.layoutDots);

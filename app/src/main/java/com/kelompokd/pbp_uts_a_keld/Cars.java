@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-public class Car {
+public class Cars {
     public String jenis;
     public String harga;
     public String lamaPemakaian;
@@ -15,7 +15,7 @@ public class Car {
     public String maxPenumpang;
     public String imageUrl;
 
-    public Car(String jenis, String harga, String lamaPemakaian, String fasilitas, String maxPenumpang, String imageUrl) {
+    public Cars(String jenis, String harga, String lamaPemakaian, String fasilitas, String maxPenumpang, String imageUrl) {
         this.jenis = jenis;
         this.harga = harga;
         this.lamaPemakaian = lamaPemakaian;

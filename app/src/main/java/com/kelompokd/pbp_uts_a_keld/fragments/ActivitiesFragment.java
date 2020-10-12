@@ -52,6 +52,14 @@ public class ActivitiesFragment extends Fragment {
                 Navigation.findNavController(root).navigate(R.id.nav_acc_settings);
             }
         });
+
+        CardView wishlist = root.findViewById(R.id.cv_wishlist);
+        wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_wishlist);
+            }
+        });
         return root;
     }
 

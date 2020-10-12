@@ -51,9 +51,6 @@
     </com.google.android.material.navigation.NavigationView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header">
@@ -66,6 +63,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/adapter_recycler_view"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/faBtn_wishlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/wishlist"
+            android:tint="#e61920"
+            app:maxImageSize="30dp"
+            android:backgroundTint="@color/colorYellow"
+            app:elevation="0dp"
+            app:borderWidth="0dp"
+            android:elevation="0dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/faBtn_pesan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:elevation="0dp"
+            android:src="@drawable/check"
+            app:borderWidth="0dp"
+            android:backgroundTint="@color/colorYellow"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/faBtn_wishlist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="30dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

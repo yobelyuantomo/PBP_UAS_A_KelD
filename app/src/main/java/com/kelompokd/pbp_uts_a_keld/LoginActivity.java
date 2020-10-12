@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                //Auth The User
+                //Auth The Cars
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

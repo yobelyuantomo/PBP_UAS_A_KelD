@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Cars Created", Toast.LENGTH_SHORT).show();
                             Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                             homeIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(homeIntent);

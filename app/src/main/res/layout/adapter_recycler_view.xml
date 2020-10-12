@@ -2,15 +2,15 @@
 <layout>
     <data>
         <variable
-            name="car"
-            type="com.kelompokd.pbp_uts_a_keld.Car" />
+            name="cars"
+            type="com.kelompokd.pbp_uts_a_keld.Cars" />
 
         <variable
             name="imageUrl"
             type="String" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_marginBottom="3dp"
         tools:context=".RecyclerViewAdapter"
-        android:id="@+id/ParentAdapter">
+        android:id="@+id/item_card"
+        android:clickable="true"
+        android:checkable="true"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,12 +32,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp">
-                <com.google.android.material.imageview.ShapeableImageView
+                <ImageView
                     android:layout_width="105dp"
                     android:layout_height="105dp"
-                    android:id="@+id/ivFotoProfil"
+                    android:id="@+id/iv_car"
                     app:profileImage="@{imageUrl}">
-                </com.google.android.material.imageview.ShapeableImageView>
+                </ImageView>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -54,7 +57,7 @@
                         android:textStyle="bold"
                         android:textSize="20dp"
                         android:textColor="@color/textColor"
-                        android:text="@{car.jenis}"/>
+                        android:text="@{cars.jenis}"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -71,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:text="@{car.harga}" />
+                        android:text="@{cars.harga}" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -87,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:textColor="@color/textColor"
-                        android:text="@{car.lamaPemakaian}" />
+                        android:text="@{cars.lamaPemakaian}" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:textColor="@color/textColor"
-                        android:text="@{car.fasilitas}"/>
+                        android:text="@{cars.fasilitas}"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -119,11 +122,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:textColor="@color/textColor"
-                        android:text="@{car.maxPenumpang}" />
+                        android:text="@{cars.maxPenumpang}" />
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

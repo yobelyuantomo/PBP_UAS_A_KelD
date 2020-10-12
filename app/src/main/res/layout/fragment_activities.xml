@@ -128,6 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
+                    android:id="@+id/cv_wishlist"
                     android:layout_rowWeight="1"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="8dp"

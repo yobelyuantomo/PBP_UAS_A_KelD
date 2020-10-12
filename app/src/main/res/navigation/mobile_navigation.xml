@@ -81,12 +81,22 @@
         android:id="@+id/nav_our_teams"
         android:name="com.kelompokd.pbp_uts_a_keld.fragments.TeamsFragment"
         android:label="Teams"
-        tools:layout="@layout/fragment_teams"/>
+        tools:layout="@layout/fragment_teams">
+        <action
+            android:id="@+id/action_nav_our_teams_to_nav_wishlist"
+            app:destination="@id/nav_wishlist" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_our_location"
         android:name="com.kelompokd.pbp_uts_a_keld.fragments.LocationFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account"/>
+
+    <fragment
+        android:id="@+id/nav_wishlist"
+        android:name="com.kelompokd.pbp_uts_a_keld.fragments.WishlistFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_wishlist"/>
 
 </navigation>
