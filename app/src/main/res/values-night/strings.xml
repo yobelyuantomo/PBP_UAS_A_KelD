@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">MyDayNightExample</string>
 
     <string name="theme_mode">Night Mode</string>
 
