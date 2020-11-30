@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.HomeFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_activities"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.ActivitiesFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.ActivitiesFragment"
         android:label="Home"
         tools:layout="@layout/fragment_activities">
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.SettingsFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.SettingsFragment"
         android:label="Home"
         tools:layout="@layout/fragment_settings">
         <action
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/nav_aboutus"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.AboutusFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.AboutusFragment"
         android:label="Home"
         tools:layout="@layout/fragment_aboutus">
         <action
@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/nav_sewa_mobil"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.SewaFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.SewaFragment"
         android:label="Sewa"
         tools:layout="@layout/fragment_sewa">
         <action
@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/nav_theme"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.ThemeFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.ThemeFragment"
         android:label="Sewa"
         tools:layout="@layout/fragment_theme">
         <action
@@ -69,7 +69,7 @@
 
     <fragment
         android:id="@+id/nav_acc_settings"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.AccountFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.AccountFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account">
         <action
@@ -79,7 +79,7 @@
 
     <fragment
         android:id="@+id/nav_our_teams"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.TeamsFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.TeamsFragment"
         android:label="Teams"
         tools:layout="@layout/fragment_teams">
         <action
@@ -89,14 +89,34 @@
 
     <fragment
         android:id="@+id/nav_our_location"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.LocationFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.LocationFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account"/>
 
     <fragment
         android:id="@+id/nav_wishlist"
-        android:name="com.kelompokd.pbp_uts_a_keld.fragments.WishlistFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.WishlistFragment"
         android:label="Account"
-        tools:layout="@layout/fragment_wishlist"/>
+        tools:layout="@layout/fragment_wishlist">
+        <action
+            android:id="@+id/action_nav_wishlist_to_nav_checkout"
+            app:destination="@id/nav_checkout" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_checkout"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CheckoutFragment"
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout">
+        <action
+            android:id="@+id/action_nav_checkout_to_nav_editProfile"
+            app:destination="@id/nav_editProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_editProfile"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.EditProfileFragment"
+        android:label="EditProfile"
+        tools:layout="@layout/fragment_edit_profile"/>
 
 </navigation>

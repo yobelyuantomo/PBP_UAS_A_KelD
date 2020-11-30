@@ -46,4 +46,8 @@
 
     <string name="mapbox_access_token">pk.eyJ1IjoiYmFzdG90b2FnIiwiYSI6ImNrZm5yY284NjAydjMycW41a3M2cXF0Y24ifQ.5-PDA-bKZwNyrHBtFc-Wvg</string>
     <string name="navigasi">START NAVIGATION</string>
+    <string name="verification">Verification</string>
+    <string name="click_the_button_link_we_just_sent_you_on_your_email_address">Click the button link we just sent you on your email address.</string>
+    <string name="go_to_your_gmail_app">Go to your gmail App</string>
+    <string name="nama_pemesan">Nama Pemesan</string>
 </resources>

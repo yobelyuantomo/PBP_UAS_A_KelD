@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.SewaFragment">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_alignParentTop="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:padding="0dp"
+            android:id="@+id/account_settings_corner"
+            android:src="@drawable/account_circle"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorYellow"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="@color/colorYellow"
+                android:tint="@color/textColor2"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                android:layout_gravity="center"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lihat Pesanan"
+                android:layout_marginLeft="20dp"
+                android:layout_marginVertical="15dp"
+                android:textColor="@color/textColor2"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_car_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/adapter_recycler_view"/>
+
+        <!--
+            Adapter diatas hanya contoh, nanti yang ditampilkan
+            pada adapter adalah data Nama mobil (Ditulis
+            seperti tulisan Item 0), Durasi Pakai (Sesuai pesanan
+            pengguna), Tanggal Pesan dan Gambar di sampingnya
+        -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

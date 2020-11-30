@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:625844664140:android:4cc9c12aca8bc83a3e41e9",
         "android_client_info": {
-          "package_name": "com.kelompokd.pbp_uts_a_keld"
+          "package_name": "com.kelompokd.pbp_uas_a_keld"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "625844664140-6t2tb08ngsj0cbskhnj7iqbmd0770cou.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.kelompokd.pbp_uts_a_keld",
+            "package_name": "com.kelompokd.pbp_uas_a_keld",
             "certificate_hash": "5cedae14c1a411a21acffcfd9be5da24564d3650"
           }
         },

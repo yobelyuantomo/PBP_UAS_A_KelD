@@ -3,7 +3,7 @@
     <data>
         <variable
             name="cars"
-            type="com.kelompokd.pbp_uts_a_keld.Cars" />
+            type="com.kelompokd.pbp_uas_a_keld.Cars" />
 
         <variable
             name="imageUrl"
