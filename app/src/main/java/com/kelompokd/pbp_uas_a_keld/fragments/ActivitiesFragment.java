@@ -46,6 +46,14 @@ public class ActivitiesFragment extends Fragment {
             }
         });
 
+        CardView wisata_activities = root.findViewById(R.id.wisata_activities);
+        wisata_activities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_paketWisata);
+            }
+        });
+
         acc_setting_corner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +66,14 @@ public class ActivitiesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(root).navigate(R.id.nav_wishlist);
+            }
+        });
+
+        CardView lihatPesanan = root.findViewById(R.id.cv_lihatPesanan);
+        lihatPesanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(root).navigate(R.id.nav_lihatPesanan);
             }
         });
         return root;

@@ -67,11 +67,12 @@ public class AccountFragment extends Fragment {
 
     SharedPreferences sharedpreferences;
     public static final String loginPreferences = "loginPreferences";
-    String id, nama, email;
+    String id, nama, email, alamat;
 
     public final static String TAG_ID = "id";
     public final static String TAG_FULL_NAME = "full_name";
     public final static String TAG_EMAIL = "email";
+    public final static String TAG_ALAMAT = "alamat";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class AccountFragment extends Fragment {
         id = sharedpreferences.getString(TAG_ID, null);
         nama = sharedpreferences.getString(TAG_FULL_NAME, null);
         email = sharedpreferences.getString(TAG_EMAIL, null);
+        alamat = sharedpreferences.getString(TAG_ALAMAT, null);
 
         CardView btn_logout = root.findViewById(R.id.cv_logout);
         ImageButton back_btn = root.findViewById(R.id.back_btn);
@@ -219,6 +221,7 @@ public class AccountFragment extends Fragment {
         editor.putString(TAG_ID, null);
         editor.putString(TAG_FULL_NAME, null);
         editor.putString(TAG_EMAIL, null);
+        editor.putString(TAG_ALAMAT, null);
         editor.commit();
 
         Intent ua = new Intent(getContext(), LoginActivity.class);

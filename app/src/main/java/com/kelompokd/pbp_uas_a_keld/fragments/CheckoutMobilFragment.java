@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ import android.widget.ImageButton;
 import com.google.android.material.button.MaterialButton;
 import com.kelompokd.pbp_uas_a_keld.R;
 
-public class CheckoutFragment extends Fragment {
+public class CheckoutMobilFragment extends Fragment {
 
     MaterialButton btnBatal, btnCheckout;
 
@@ -31,7 +30,7 @@ public class CheckoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_checkout, container, false);
+        View root = inflater.inflate(R.layout.fragment_checkout_mobil, container, false);
 
         //Ambil data user dari data yang disimpan pada sharedpreferences
         sharedpreferences = getActivity().getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.SewaFragment">
+    tools:context=".fragments.WisataFragment">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/header"
@@ -40,7 +40,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lihat Pesanan"
+                android:text="Paket Wisata"
                 android:layout_marginLeft="20dp"
                 android:layout_marginVertical="15dp"
                 android:textColor="@color/textColor2"
@@ -56,20 +56,46 @@
         android:layout_below="@id/header">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_car_list"
+            android:id="@+id/recycler_wisata_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/adapter_carlist"/>
+            tools:listitem="@layout/adapter_wisatalist"/>
 
-        <!--
-            Adapter diatas hanya contoh, nanti yang ditampilkan
-            pada adapter adalah data Nama mobil (Ditulis
-            seperti tulisan Item 0), Durasi Pakai (Sesuai pesanan
-            pengguna), Tanggal Pesan dan Gambar di sampingnya
-        -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/faBtn_wishlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/wishlist"
+            android:tint="#e61920"
+            app:maxImageSize="30dp"
+            android:backgroundTint="@color/colorYellow"
+            app:elevation="0dp"
+            app:borderWidth="0dp"
+            android:elevation="0dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/faBtn_pesan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:elevation="0dp"
+            android:src="@drawable/check"
+            app:borderWidth="0dp"
+            android:backgroundTint="@color/colorYellow"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/faBtn_wishlist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="30dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

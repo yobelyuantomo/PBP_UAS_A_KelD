@@ -51,10 +51,11 @@ public class LoginActivity extends AppCompatActivity {
     public final static String TAG_ID = "id";
     public final static String TAG_FULL_NAME = "full_name";
     public final static String TAG_EMAIL = "email";
+    public final static String TAG_ALAMAT = "alamat";
 
     SharedPreferences sharedpreferences;
     Boolean session = false, verify = false;
-    String id, nama, email;
+    String id, nama, email, alamat;
     public static final String loginPreferences = "loginPreferences";
     public static final String session_status = "session_status";
     public static final String verify_status = "verify_status";
@@ -87,16 +88,18 @@ public class LoginActivity extends AppCompatActivity {
         id = sharedpreferences.getString(TAG_ID, null);
         nama = sharedpreferences.getString(TAG_FULL_NAME, null);
         email = sharedpreferences.getString(TAG_EMAIL, null);
+        alamat = sharedpreferences.getString(TAG_ALAMAT, null);
 
         //EDIT INI CUYY NANTI, INI CUMA UNTUK COBA"
-        session = true;
-        verify = true;
+//        session = true;
+//        verify = true;
 
         if (session && verify) {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             intent.putExtra(TAG_ID, id);
             intent.putExtra(TAG_FULL_NAME, nama);
             intent.putExtra(TAG_EMAIL, email);
+            intent.putExtra(TAG_ALAMAT, alamat);
             finish();
             startActivity(intent);
         }
@@ -105,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra(TAG_ID, id);
             intent.putExtra(TAG_FULL_NAME, nama);
             intent.putExtra(TAG_EMAIL, email);
+            intent.putExtra(TAG_ALAMAT, alamat);
             finish();
             startActivity(intent);
         }
@@ -170,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                             String id = userJson.getString(TAG_ID);
                             String nama = userJson.getString(TAG_FULL_NAME);
                             String email = userJson.getString(TAG_EMAIL);
+                            String alamat = userJson.getString(TAG_ALAMAT);
 
                             if(jsonObject.getString("message").equals("Login Success"))
                             {
@@ -180,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString(TAG_ID, id);
                                 editor.putString(TAG_FULL_NAME, nama);
                                 editor.putString(TAG_EMAIL, email);
+                                editor.putString(TAG_ALAMAT, alamat);
                                 editor.commit();
 
                                 // Memanggil Home
@@ -187,6 +193,7 @@ public class LoginActivity extends AppCompatActivity {
                                 intent.putExtra(TAG_ID, id);
                                 intent.putExtra(TAG_FULL_NAME, nama);
                                 intent.putExtra(TAG_EMAIL, email);
+                                intent.putExtra(TAG_ALAMAT, alamat);
                                 finish();
                                 startActivity(intent);
                             }
@@ -235,6 +242,7 @@ public class LoginActivity extends AppCompatActivity {
                         String id = userJson.getString(TAG_ID);
                         String nama = userJson.getString(TAG_FULL_NAME);
                         String email = userJson.getString(TAG_EMAIL);
+                        String alamat = userJson.getString(TAG_ALAMAT);
 
                         if(status.equals("verify")){
 
@@ -245,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(TAG_ID, id);
                             editor.putString(TAG_FULL_NAME, nama);
                             editor.putString(TAG_EMAIL, email);
+                            editor.putString(TAG_ALAMAT, alamat);
                             editor.commit();
 
                             // Memanggil VerifActivity
@@ -252,6 +261,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra(TAG_ID, id);
                             intent.putExtra(TAG_FULL_NAME, nama);
                             intent.putExtra(TAG_EMAIL, email);
+                            intent.putExtra(TAG_ALAMAT, alamat);
                             finish();
                             startActivity(intent);
                         }

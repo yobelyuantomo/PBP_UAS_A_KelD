@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CheckoutWisataFragment">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_alignParentTop="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:padding="0dp"
+            android:id="@+id/account_settings_corner"
+            android:src="@drawable/account_circle"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorYellow"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Checkout"
+                android:layout_marginLeft="20dp"
+                android:layout_marginVertical="15dp"
+                android:textColor="@color/textColor2"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@id/header"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/layout_pemesan"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="@string/nama_pemesan"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <!-- Nama Pemesan auto generate dari full_name database-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pemesan"
+                    android:textColor="@color/textColor3"
+                    android:textColorHint="@color/textColor4"
+                    android:padding="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintTop_toBottomOf="@id/layout_pemesan"
+                android:id="@+id/layout_tglPesan"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Tanggal Pesan"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <!--  Tgl pesan kalau bisa pakai date picker-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tglPesan"
+                    android:textColor="@color/textColor3"
+                    android:textColorHint="@color/textColor4"
+                    android:padding="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintTop_toBottomOf="@id/layout_tglPesan"
+                android:id="@+id/layout_tglTransaksi"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Tanggal Transaksi"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <!-- Tanggal transaksi auto generate time saat transaksi-->
+                <!-- hint: bisa lihat cara nya di modul ttg pdf-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tglTransaksi"
+                    android:textColor="@color/textColor3"
+                    android:textColorHint="@color/textColor4"
+                    android:padding="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvItem"
+                android:textSize="15sp"
+                android:paddingLeft="15dp"
+                android:text="Item: "
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_tglTransaksi"/>
+
+            <!-- Alangkah baiknya di adapter ada tambahan button hapus-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_wisata_checkout"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="330dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvItem"
+                tools:listitem="@layout/adapter_wisatalist" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintTop_toBottomOf="@id/recycler_wisata_checkout"
+                android:id="@+id/layout_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Alamat"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/alamat"
+                    android:textColor="@color/textColor3"
+                    android:textColorHint="@color/textColor4"
+                    android:padding="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintTop_toBottomOf="@id/layout_alamat"
+                android:id="@+id/layout_totalBayar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Total Bayar"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/totalBayar"
+                    android:textColor="@color/textColor3"
+                    android:textColorHint="@color/textColor4"
+                    android:padding="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_paymentMethod"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_totalBayar"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="10dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/paymentMethod"
+                    android:inputType="none"
+                    android:hint="Jenis Pembayaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintTop_toBottomOf="@id/layout_paymentMethod"
+                android:id="@+id/layout_noKartu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="No Kartu"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <!-- Field no kartu hanya akan muncul kalau jenis pembayaran nya Kartu kredit-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/noKartu"
+                    android:textColor="@color/textColor3"
+                    android:textColorHint="@color/textColor4"
+                    android:padding="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_noKartu">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBatal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginVertical="20dp"
+                    android:text="Batal" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCheckout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:text="Checkout" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</RelativeLayout>

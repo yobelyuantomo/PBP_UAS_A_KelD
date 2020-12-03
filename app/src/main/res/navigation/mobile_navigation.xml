@@ -105,9 +105,9 @@
 
     <fragment
         android:id="@+id/nav_checkout"
-        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CheckoutFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CheckoutMobilFragment"
         android:label="Checkout"
-        tools:layout="@layout/fragment_checkout">
+        tools:layout="@layout/fragment_checkout_mobil">
         <action
             android:id="@+id/action_nav_checkout_to_nav_editProfile"
             app:destination="@id/nav_editProfile" />
@@ -117,6 +117,38 @@
         android:id="@+id/nav_editProfile"
         android:name="com.kelompokd.pbp_uas_a_keld.fragments.EditProfileFragment"
         android:label="EditProfile"
-        tools:layout="@layout/fragment_edit_profile"/>
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_nav_editProfile_to_nav_paketWisata"
+            app:destination="@id/nav_paketWisata" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_paketWisata"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.WisataFragment"
+        android:label="PaketWisata"
+        tools:layout="@layout/fragment_wisata">
+        <action
+            android:id="@+id/action_nav_paketWisata_to_nav_checkout_wisata"
+            app:destination="@id/nav_checkout_wisata" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_checkout_wisata"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CheckoutWisataFragment"
+        android:label="CheckoutWisata"
+        tools:layout="@layout/fragment_checkout_wisata">
+        <action
+            android:id="@+id/action_nav_checkout_wisata_to_nav_lihatPesanan"
+            app:popUpTo="@+id/nav_checkout_wisata"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_lihatPesanan" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_lihatPesanan"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.LihatPesananFragment"
+        android:label="CheckoutWisata"
+        tools:layout="@layout/fragment_lihat_pesanan"/>
 
 </navigation>

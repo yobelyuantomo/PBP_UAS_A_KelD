@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.kelompokd.pbp_uas_a_keld.Cars;
 import com.kelompokd.pbp_uas_a_keld.R;
-import com.kelompokd.pbp_uas_a_keld.databinding.AdapterRecyclerViewBinding;
+import com.kelompokd.pbp_uas_a_keld.databinding.AdapterCarlistBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
     private Context context;
     private List<Cars> result;
 
-    AdapterRecyclerViewBinding binding;
+    AdapterCarlistBinding binding;
 
     //Membuat variabel penampung untuk title receipt yang "checked"
     public ArrayList<String> checked = new ArrayList<String>();
@@ -41,7 +41,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.adapter_recycler_view, parent, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.adapter_carlist, parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -69,13 +69,13 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private AdapterRecyclerViewBinding binding;
+        private AdapterCarlistBinding binding;
 
         private ImageView imageCar;
         private TextView jenis, harga, pemakaian, fasilitas, maxPenumpang;
         private MaterialCardView itemCard;
 
-        public MyViewHolder(@NonNull AdapterRecyclerViewBinding binding){
+        public MyViewHolder(@NonNull AdapterCarlistBinding binding){
 
             super(binding.getRoot());
             this.binding = binding;
