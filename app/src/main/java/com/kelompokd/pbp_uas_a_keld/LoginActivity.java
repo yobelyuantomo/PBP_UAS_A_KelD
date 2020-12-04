@@ -21,6 +21,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textview.MaterialTextView;
 import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
+import com.kelompokd.pbp_uas_a_keld.UnitTest.ActivityUtil;
+import com.kelompokd.pbp_uas_a_keld.UnitTest.LoginPresenter;
+import com.kelompokd.pbp_uas_a_keld.UnitTest.LoginService;
+import com.kelompokd.pbp_uas_a_keld.UnitTest.LoginView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +35,7 @@ import java.util.Map;
 
 import static com.android.volley.Request.Method.POST;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     EditText txt_email, txt_password;
     Button btn_login;
@@ -60,10 +64,14 @@ public class LoginActivity extends AppCompatActivity {
     public static final String session_status = "session_status";
     public static final String verify_status = "verify_status";
 
+    private LoginPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        presenter = new LoginPresenter(this, new LoginService());
 
         txt_email = findViewById(R.id.input_email);
         txt_password = findViewById(R.id.input_password);
@@ -92,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //EDIT INI CUYY NANTI, INI CUMA UNTUK COBA"
 //        session = true;
-//        verify = true;
+        verify = true;
 
         if (session && verify) {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -119,6 +127,11 @@ public class LoginActivity extends AppCompatActivity {
                 String email = txt_email.getText().toString();
                 String password = txt_password.getText().toString();
 
+                ///////////////////////////////////////////////////////////////
+                    presenter.onLoginClicked();
+                //////////////////////////////////////////////////////////////
+
+
                 // Mengecek inputan yang kosong
                 if (email.trim().length() > 0 && password.trim().length() > 0) {
                     if (conMgr.getActiveNetworkInfo() != null
@@ -128,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext() ,"No Internet Connection", Toast.LENGTH_LONG).show();
                     }
+
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext() ,"Inputan tidak boleh kosong", Toast.LENGTH_LONG).show();
@@ -147,7 +161,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Fungsi menampilkan data mahasiswa
     public void checkLogin(String email, String password) {
         //Pendeklarasian queue
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -238,13 +251,13 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(jsonError);
                         String status = jsonObject.getString("status");
 
-                        JSONObject userJson = jsonObject.getJSONObject("data");
-                        String id = userJson.getString(TAG_ID);
-                        String nama = userJson.getString(TAG_FULL_NAME);
-                        String email = userJson.getString(TAG_EMAIL);
-                        String alamat = userJson.getString(TAG_ALAMAT);
-
                         if(status.equals("verify")){
+
+                            JSONObject userJson = jsonObject.getJSONObject("data");
+                            String id = userJson.getString(TAG_ID);
+                            String nama = userJson.getString(TAG_FULL_NAME);
+                            String email = userJson.getString(TAG_EMAIL);
+                            String alamat = userJson.getString(TAG_ALAMAT);
 
                             // menyimpan login ke session
                             SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -265,8 +278,8 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                             startActivity(intent);
                         }
-                        else if(status.equals("unauth")){
-                            Toast.makeText(getApplicationContext(), "Email / Password Salah", Toast.LENGTH_LONG).show();
+                        else{
+                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                         }
 
                     } catch (JSONException e) {
@@ -291,5 +304,42 @@ public class LoginActivity extends AppCompatActivity {
         };
         // Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
         queue.add(stringRequest);
+    }
+
+    @Override
+    public String getEmail() {
+        return txt_email.getText().toString();
+    }
+
+    @Override
+    public void showEmailError(String message) {
+        txt_email.setError(message);
+        txt_email.requestFocus();
+    }
+
+    @Override
+    public String getPassword() {
+        return txt_password.getText().toString();
+    }
+
+    @Override
+    public void showPasswordError(String message) {
+        txt_password.setError(message);
+        txt_password.requestFocus();
+    }
+
+    @Override
+    public void startMainActivity() {
+        new ActivityUtil(this).startMainActivity();
+    }
+
+    @Override
+    public void showLoginError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
     }
 }
