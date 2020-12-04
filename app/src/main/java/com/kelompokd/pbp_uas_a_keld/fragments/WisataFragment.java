@@ -179,7 +179,7 @@ public class WisataFragment extends Fragment {
         progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_WISATA + id
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_WISATA_BY_ID + id
                 , null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

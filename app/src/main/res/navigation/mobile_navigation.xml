@@ -149,6 +149,24 @@
         android:id="@+id/nav_lihatPesanan"
         android:name="com.kelompokd.pbp_uas_a_keld.fragments.LihatPesananFragment"
         android:label="CheckoutWisata"
-        tools:layout="@layout/fragment_lihat_pesanan"/>
+        tools:layout="@layout/fragment_lihat_pesanan">
+        <action
+            android:id="@+id/action_nav_lihatPesanan_to_nav_edit_pesanan_wisata"
+            app:destination="@id/nav_edit_pesanan_wisata" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_edit_pesanan_wisata"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.EditPesananWisata"
+        android:label="CheckoutWisata"
+        tools:layout="@layout/fragment_edit_pesanan_wisata">
+
+        <action
+            android:id="@+id/action_nav_edit_pesanan_wisata_to_nav_lihatPesanan"
+            app:popUpTo="@+id/nav_edit_pesanan_wisata"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_lihatPesanan" />
+
+    </fragment>
 
 </navigation>

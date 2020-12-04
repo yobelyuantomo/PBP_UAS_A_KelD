@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -28,22 +31,28 @@ import com.google.android.material.card.MaterialCardView;
 import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
 import com.kelompokd.pbp_uas_a_keld.R;
 import com.kelompokd.pbp_uas_a_keld.model.Pesanan;
+import com.kelompokd.pbp_uas_a_keld.model.Wisata;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.android.volley.Request.Method.DELETE;
+import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
 
 public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterPesananViewHolder> {
 
     private List<Pesanan> pesananList;
     private List<Pesanan> pesananListFiltered;
+    private List<Wisata> dataWisata = new ArrayList<>();
     private Context context;
     private View view;
     private AdapterPesanan.deleteItemListener mListener;
@@ -103,7 +112,7 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
         holder.editItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                getWisataNama(pesanan.getPesanan(), pesanan);
             }
         });
     }
@@ -192,6 +201,73 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
                     String jsonError = new String(networkResponse.data);
                     Toast.makeText(context, jsonError, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
+    }
+
+    public void getWisataNama(String nama, Pesanan pesanan){
+        //Pendeklarasian queue
+        RequestQueue queue = Volley.newRequestQueue(view.getContext());
+
+        //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
+        //untuk request ini tidak memerlukan parameter
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(view.getContext());
+        progressDialog.setMessage("loading....");
+        progressDialog.setTitle("Menampilkan paket wisata");
+        progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_WISATA_BY_NAME + nama
+                , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+                progressDialog.dismiss();
+                try {
+                    //Mengambil data response json object yang berupa data mahasiswa
+                    JSONArray jsonArray = response.getJSONArray("data");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        //Mengubah data jsonArray tertentu menjadi json Object
+                        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+                        int idWisata        = jsonObject.optInt("id");
+                        String nama_wisata  = jsonObject.optString("nama_wisata");
+                        int harga           = jsonObject.optInt("harga");
+                        int durasi          = jsonObject.optInt("durasi");
+                        String fasilitas    = jsonObject.optString("fasilitas");
+                        int kuota           = jsonObject.optInt("kuota");
+                        String gambar       = jsonObject.optString("img_wisata");
+
+                        //Membuat objek Wisata
+                        Wisata wisata = new Wisata(idWisata, nama_wisata, harga, durasi, fasilitas, kuota, gambar);
+
+                        //Menambahkan objek user tadi ke list user
+                        dataWisata.add(wisata);
+                    }
+
+                    if(jsonArray.length() > 0){
+                        Bundle data = new Bundle();
+                        data.putSerializable("pesanan", (Serializable) pesanan);
+                        data.putSerializable("dataWisata", (Serializable) dataWisata);
+                        Navigation.findNavController(view).navigate(R.id.nav_edit_pesanan_wisata, data);
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                progressDialog.dismiss();
+                Toast.makeText(view.getContext(), error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
