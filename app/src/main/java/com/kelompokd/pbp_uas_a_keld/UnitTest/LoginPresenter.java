@@ -16,7 +16,6 @@ public class LoginPresenter {
 
         if(!view.getEmail().contains("@") || !view.getEmail().contains("."))
         {
-            System.out.println(view.getEmail());
             view.showEmailError("Invalid Email");
             return;
         }
