@@ -91,6 +91,7 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
         holder.txtTglTransaksi.setText(pesanan.getTglTransaksi());
         if(pesanan.getTagihan() != 0){
             holder.txtTagihan.setText("Rp "+ formatter.format(pesanan.getTagihan()));
+            holder.txtTagihan.setTextColor(Color.parseColor("#FF0000"));
         }
         else{
             holder.txtTagihan.setText("Lunas");

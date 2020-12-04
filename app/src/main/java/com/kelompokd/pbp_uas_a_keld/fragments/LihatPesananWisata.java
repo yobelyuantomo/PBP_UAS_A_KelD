@@ -100,7 +100,7 @@ public class LihatPesananWisata extends Fragment {
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(view.getContext());
         progressDialog.setMessage("loading....");
-        progressDialog.setTitle("Menampilkan data buku");
+        progressDialog.setTitle("Menampilkan data pesanan");
         progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 

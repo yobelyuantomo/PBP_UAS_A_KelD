@@ -256,10 +256,10 @@ public class CheckoutWisataFragment extends Fragment {
         int selisih = 0;
 
         if(sPayment.equals("Tunai")){
-            selisih = 0;
+            selisih = wisata.get(i).getHarga();
         }
         else{
-            selisih = wisata.get(i).getHarga();
+            selisih = 0;
         }
 
         return selisih;
