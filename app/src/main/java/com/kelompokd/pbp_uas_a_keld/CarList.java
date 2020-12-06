@@ -7,7 +7,7 @@ public class CarList {
 
     public CarList(){
         Cars = new ArrayList();
-        Cars.add(AVANZA);
+        boolean add = Cars.add(AVANZA);
         Cars.add(ALL_NEW_AVANZA);
         Cars.add(INNOVA);
         Cars.add(INNOVA_REBORN);

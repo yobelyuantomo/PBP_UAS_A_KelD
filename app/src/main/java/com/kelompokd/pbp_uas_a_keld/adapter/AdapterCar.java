@@ -17,29 +17,28 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import com.google.android.material.card.MaterialCardView;
-import com.kelompokd.pbp_uas_a_keld.Cars;
 import com.kelompokd.pbp_uas_a_keld.R;
-import com.kelompokd.pbp_uas_a_keld.model.Wisata;
+import com.kelompokd.pbp_uas_a_keld.model.Car;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterWisata extends RecyclerView.Adapter<AdapterWisata.adapterWisataViewHolder> {
+public class AdapterCar extends RecyclerView.Adapter<AdapterCar.adapterCarViewHolder> {
 
-    private List<Wisata> wisataList;
-    private List<Wisata> wisataListFiltered;
+    private List<Car> carList;
+    private List<Car> carListFiltered;
     private Context context;
     private View view;
 
     //Membuat variabel penampung untuk title receipt yang "checked"
     public ArrayList<Integer> checked = new ArrayList<>();
 
-    public AdapterWisata(Context context, List<Wisata> wisataList) {
+    public AdapterCar(Context context, List<Car> carList) {
         this.context            = context;
-        this.wisataList           = wisataList;
-        this.wisataListFiltered   = wisataList;
+        this.carList           = carList;
+        this.carListFiltered   = carList;
     }
 
     //Membuat fungsi yang mengembalikan list title receipt yang "checked"
@@ -49,27 +48,28 @@ public class AdapterWisata extends RecyclerView.Adapter<AdapterWisata.adapterWis
 
     @NonNull
     @Override
-    public AdapterWisata.adapterWisataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterCar.adapterCarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         view = layoutInflater.inflate(R.layout.adapter_wisatalist, parent, false);
-        return new AdapterWisata.adapterWisataViewHolder(view);
+        return new AdapterCar.adapterCarViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterWisata.adapterWisataViewHolder holder, int position) {
-        final Wisata wisata = wisataListFiltered.get(position);
+    public void onBindViewHolder(@NonNull AdapterCar.adapterCarViewHolder holder, int position) {
+        final Car car = carListFiltered.get(position);
 
         NumberFormat formatter = new DecimalFormat("#,###");
-        holder.txtWisata.setText(wisata.getWisata());
-        holder.txtHarga.setText("Rp "+ formatter.format(wisata.getHarga()));
-        holder.txtDurasi.setText(Integer.toString(wisata.getDurasi()));
-        holder.txtFasilitas.setText(wisata.getFasilitas());
-        holder.txtKuota.setText(Integer.toString(wisata.getKuota()));
-        Glide.with(context)
-                .load(wisata.getGambar())
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(holder.iv_wisata);
+        holder.txtCar.setText(car.getJenis());
+        holder.txtHarga.setText("Rp "+ formatter.format(car.getHarga()));
+        holder.txtPemakaian.setText(car.getLamaPemakaian());
+        holder.txtFasilitas.setText(car.getFasilitas());
+        holder.txtMax.setText(car.getMaxPenumpang());
+//        TODO : not yet
+//        Glide.with(context)
+//                .load(car.getGambar())
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .skipMemoryCache(true)
+//                .into(holder.iv_wisata);
 
         holder.itemCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,39 +85,39 @@ public class AdapterWisata extends RecyclerView.Adapter<AdapterWisata.adapterWis
 
     @Override
     public int getItemCount() {
-        return (wisataListFiltered != null) ? wisataListFiltered.size() : 0;
+        return (carListFiltered != null) ? carListFiltered.size() : 0;
     }
 
-    public class adapterWisataViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtWisata, txtHarga, txtDurasi, txtFasilitas, txtKuota;
-        private ImageView iv_wisata;
+    public class adapterCarViewHolder extends RecyclerView.ViewHolder {
+        private TextView txtCar, txtHarga, txtPemakaian, txtFasilitas, txtMax;
+        private ImageView iv_car;
         private MaterialCardView itemCard;
 
-        public adapterWisataViewHolder(@NonNull View itemView) {
+        public adapterCarViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtWisata         = itemView.findViewById(R.id.tvJenis);
+            txtCar         = itemView.findViewById(R.id.tvJenis);
             txtHarga         = itemView.findViewById(R.id.tvHarga);
-            txtDurasi         = itemView.findViewById(R.id.tvDurasi);
+            txtPemakaian         = itemView.findViewById(R.id.tvPemakaian);
             txtFasilitas         = itemView.findViewById(R.id.tvFasilitas);
-            txtKuota         = itemView.findViewById(R.id.tvKuota);
-            iv_wisata        = itemView.findViewById(R.id.iv_wisata);
+            txtMax         = itemView.findViewById(R.id.tvMax);
+            iv_car        = itemView.findViewById(R.id.iv_car);
 
             itemCard = itemView.findViewById(R.id.item_card);
         }
     }
     //Membuat fungsi untuk menambahkan title receipt yang checked dan menghapus yang unchecked
-    public void addRemoveJenis(final adapterWisataViewHolder holder, final int i, View v){
-        int idWisata;
+    public void addRemoveJenis(final adapterCarViewHolder holder, final int i, View v){
+        int idCar;
 
-        idWisata = wisataList.get(i).getIdWisata();
+        idCar = carList.get(i).getId();
 
 
         if(holder.itemCard.isChecked()){
             //Menambahkan objek user tadi ke list user
-            checked.add(idWisata);
+            checked.add(idCar);
         }
         else if(!holder.itemCard.isChecked()){
-            checked.remove(checked.indexOf(idWisata));
+            checked.remove(checked.indexOf(idCar));
         }
     }
 }
