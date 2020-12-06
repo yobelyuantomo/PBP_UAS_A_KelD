@@ -1,19 +1,18 @@
-package com.kelompokd.pbp_uas_a_keld.fragments;
+package com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
@@ -23,7 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
 import com.kelompokd.pbp_uas_a_keld.R;
-import com.kelompokd.pbp_uas_a_keld.adapter.AdapterPesananWisata;
+import com.kelompokd.pbp_uas_a_keld.adapter.AdapterSewaMobil;
 import com.kelompokd.pbp_uas_a_keld.model.Pesanan;
 
 import org.json.JSONArray;
@@ -35,11 +34,11 @@ import java.util.List;
 
 import static com.android.volley.Request.Method.GET;
 
-public class LihatPesananWisata extends Fragment {
+public class LihatPesananMobil extends Fragment {
 
     View view;
     private RecyclerView recyclerView;
-    private AdapterPesananWisata adapter;
+    private AdapterSewaMobil adapter;
 
     SharedPreferences sharedpreferences;
     public static final String loginPreferences = "loginPreferences";
@@ -55,7 +54,7 @@ public class LihatPesananWisata extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_lihat_pesanan_wisata, container, false);
+        view = inflater.inflate(R.layout.fragment_lihat_sewa_mobil, container, false);
 
         //Ambil data user dari data yang disimpan pada sharedpreferences
         sharedpreferences = getActivity().getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
@@ -75,8 +74,8 @@ public class LihatPesananWisata extends Fragment {
         /*Buat tampilan untuk adapter jika potrait menampilkan 2 data dalam 1 baris,
         sedangakan untuk landscape 4 data dalam 1 baris*/
 
-        recyclerView = view.findViewById(R.id.recycler_pesanan_wisata);
-        adapter = new AdapterPesananWisata(view.getContext(), listPesanan, new AdapterPesananWisata.deleteItemListener() {
+        recyclerView = view.findViewById(R.id.recycler_pesanan_mobil);
+        adapter = new AdapterSewaMobil(view.getContext(), listPesanan, new AdapterSewaMobil.deleteItemListener() {
             @Override
             public void deleteItem(Boolean delete) {
                 adapter.notifyDataSetChanged();
@@ -99,10 +98,10 @@ public class LihatPesananWisata extends Fragment {
         progressDialog = new ProgressDialog(view.getContext());
         progressDialog.setMessage("loading....");
         progressDialog.setTitle("Menampilkan data pesanan");
-        progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SELECT_PESANAN_WISATA + nama
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SELECT_PESANAN_MOBIL + nama
                 , null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

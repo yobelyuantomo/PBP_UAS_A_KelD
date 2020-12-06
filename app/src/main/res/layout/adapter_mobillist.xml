@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data>
-        <variable
-            name="cars"
-            type="com.kelompokd.pbp_uas_a_keld.Cars" />
-
-        <variable
-            name="imageUrl"
-            type="String" />
-    </data>
-
     <com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -35,8 +25,7 @@
                 <ImageView
                     android:layout_width="105dp"
                     android:layout_height="105dp"
-                    android:id="@+id/iv_car"
-                    app:profileImage="@{imageUrl}">
+                    android:id="@+id/iv_mobil">
                 </ImageView>
             </LinearLayout>
             <LinearLayout
@@ -51,13 +40,12 @@
                     android:layout_marginVertical="5dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvJenis"
+                        android:id="@+id/tvMobil"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:textColor="@color/textColor"
-                        android:text="@{cars.jenis}"/>
+                        android:textColor="@color/textColor" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -73,8 +61,7 @@
                         android:id="@+id/tvHarga"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="@{cars.harga}" />
+                        android:layout_marginLeft="7dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,8 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:textColor="@color/textColor"
-                        android:text="@{cars.lamaPemakaian}" />
+                        android:textColor="@color/textColor" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,8 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:textColor="@color/textColor"
-                        android:text="@{cars.fasilitas}"/>
+                        android:textColor="@color/textColor" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,12 +102,11 @@
                         android:layout_height="wrap_content"
                         android:text="Max Penumpang"/>
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvMax"
+                        android:id="@+id/tvPenumpang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:textColor="@color/textColor"
-                        android:text="@{cars.maxPenumpang}" />
+                        android:textColor="@color/textColor" />
                 </LinearLayout>
             </LinearLayout>
 

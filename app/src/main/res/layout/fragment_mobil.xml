@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.SewaFragment">
+    tools:context=".fragments.CRUDmobil.MobilFragment">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/header"
@@ -62,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/adapter_carlist"/>
+            tools:listitem="@layout/adapter_mobillist"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/faBtn_wishlist"

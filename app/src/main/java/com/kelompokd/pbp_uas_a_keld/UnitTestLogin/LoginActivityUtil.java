@@ -1,14 +1,14 @@
-package com.kelompokd.pbp_uas_a_keld.UnitTest;
+package com.kelompokd.pbp_uas_a_keld.UnitTestLogin;
 
 import android.content.Context;
 import android.content.Intent;
 
 import com.kelompokd.pbp_uas_a_keld.HomeActivity;
 
-public class ActivityUtil {
+public class LoginActivityUtil {
     private Context context;
 
-    public ActivityUtil(Context context) {
+    public LoginActivityUtil(Context context) {
         this.context = context;
     }
 

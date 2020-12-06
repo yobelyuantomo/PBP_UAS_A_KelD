@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil.LihatPesananMobil;
 import com.kelompokd.pbp_uas_a_keld.fragments.LihatPesananWisata;
-import com.kelompokd.pbp_uas_a_keld.fragments.LihatSewaMobilFragment;
 
 public class PageAdapter extends FragmentStatePagerAdapter {
     private int number_tabs;
@@ -21,7 +21,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return new LihatSewaMobilFragment();
+                return new LihatPesananMobil();
             case 1:
                 return new LihatPesananWisata();
             default:

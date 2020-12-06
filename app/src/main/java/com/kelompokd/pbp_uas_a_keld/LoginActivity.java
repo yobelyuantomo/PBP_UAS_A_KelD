@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +20,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textview.MaterialTextView;
 import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
-import com.kelompokd.pbp_uas_a_keld.UnitTest.ActivityUtil;
-import com.kelompokd.pbp_uas_a_keld.UnitTest.LoginPresenter;
-import com.kelompokd.pbp_uas_a_keld.UnitTest.LoginService;
-import com.kelompokd.pbp_uas_a_keld.UnitTest.LoginView;
+import com.kelompokd.pbp_uas_a_keld.UnitTestLogin.LoginActivityUtil;
+import com.kelompokd.pbp_uas_a_keld.UnitTestLogin.LoginPresenter;
+import com.kelompokd.pbp_uas_a_keld.UnitTestLogin.LoginService;
+import com.kelompokd.pbp_uas_a_keld.UnitTestLogin.LoginView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -330,7 +328,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void startMainActivity() {
-        new ActivityUtil(this).startMainActivity();
+        new LoginActivityUtil(this).startMainActivity();
     }
 
     @Override

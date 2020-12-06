@@ -1,20 +1,11 @@
-package com.kelompokd.pbp_uas_a_keld.UnitTest;
+package com.kelompokd.pbp_uas_a_keld.UnitTestLogin;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.widget.Toast;
-
-import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
-import com.kelompokd.pbp_uas_a_keld.HomeActivity;
-import com.kelompokd.pbp_uas_a_keld.LoginActivity;
-import com.kelompokd.pbp_uas_a_keld.VerifActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

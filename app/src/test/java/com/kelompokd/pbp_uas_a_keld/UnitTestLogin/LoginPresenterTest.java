@@ -1,4 +1,4 @@
-package com.kelompokd.pbp_uas_a_keld.UnitTest;
+package com.kelompokd.pbp_uas_a_keld.UnitTestLogin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)

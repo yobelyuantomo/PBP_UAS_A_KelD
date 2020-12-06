@@ -16,7 +16,8 @@ public class MorentAPI {
     public static final String URL_DELETE_USER = ROOT_API + "deleteUser/";
 
     //PesanController
-    public static final String URL_SELECT_PESANAN = ROOT_API + "pesananByName/";
+    public static final String URL_SELECT_PESANAN_WISATA = ROOT_API + "pesananWisataByName/";
+    public static final String URL_SELECT_PESANAN_MOBIL = ROOT_API + "pesananMobilByName/";
     public static final String URL_SHOW_PESANAN = ROOT_API + "pesananById/";
     public static final String URL_ADD_PESANAN = ROOT_API + "pesanan";
     public static final String URL_UPDATE_PESANAN = ROOT_API + "pesanan/";
@@ -24,7 +25,8 @@ public class MorentAPI {
 
     //MobilController
     public static final String URL_SELECT_MOBIL = ROOT_API + "mobil";
-    public static final String URL_SHOW_MOBIL = ROOT_API + "mobil/";
+    public static final String URL_SHOW_MOBIL_BY_NAME = ROOT_API + "mobilByName/";
+    public static final String URL_SHOW_MOBIL_BY_ID = ROOT_API + "mobilById/";
     public static final String URL_ADD_MOBIL = ROOT_API + "mobil";
     public static final String URL_UPDATE_MOBIL = ROOT_API + "mobil/";
     public static final String URL_DELETE_MOBIL = ROOT_API + "deleteMobil/";

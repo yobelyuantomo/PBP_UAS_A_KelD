@@ -1,0 +1,226 @@
+package com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil;
+
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
+import com.kelompokd.pbp_uas_a_keld.R;
+import com.kelompokd.pbp_uas_a_keld.adapter.AdapterMobil;
+import com.kelompokd.pbp_uas_a_keld.model.Mobil;
+import com.kelompokd.pbp_uas_a_keld.model.Wisata;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.android.volley.Request.Method.GET;
+
+public class MobilFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private AdapterMobil adapter;
+    private List<Mobil> listMobil;
+    private List<Mobil> dataMobil = new ArrayList<>();
+    private View view;
+
+    private List<Integer> checked = new ArrayList<>();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_mobil, container, false);
+
+        // Ketika Float Action Button di Click
+        FloatingActionButton faBtn_wishlist = view.findViewById(R.id.faBtn_wishlist);
+        FloatingActionButton faBtn_pesan= view.findViewById(R.id.faBtn_pesan);
+
+        faBtn_pesan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checked = adapter.getJenisChecked();
+                if (checked.isEmpty()){
+                    Toast.makeText(v.getContext(), "Just check, please!", Toast.LENGTH_SHORT).show();
+                }else {
+                    for(int i=0; i<checked.size(); i++){
+                        getMobilId(checked.get(i), i);
+                    }
+                }
+            }
+        });
+
+        loadDaftarMobil();
+        return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    public void loadDaftarMobil(){
+        setAdapter();
+        getMobil();
+    }
+
+    public void setAdapter(){
+        getActivity().setTitle("Data Mobil");
+
+        /*Buat tampilan untuk adapter jika potrait menampilkan 2 data dalam 1 baris,
+        sedangakan untuk landscape 4 data dalam 1 baris*/
+        listMobil = new ArrayList<Mobil>();
+        recyclerView = view.findViewById(R.id.recycler_car_list);
+        adapter = new AdapterMobil(view.getContext(), listMobil);
+
+        recyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void getMobil() {
+        //Pendeklarasian queue
+        RequestQueue queue = Volley.newRequestQueue(view.getContext());
+
+        //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
+        //untuk request ini tidak memerlukan parameter
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(view.getContext());
+        progressDialog.setMessage("loading....");
+        progressDialog.setTitle("Menampilkan data mobil");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SELECT_MOBIL
+                , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+                progressDialog.dismiss();
+                try {
+                    //Mengambil data response json object yang berupa data mahasiswa
+                    JSONArray jsonArray = response.getJSONArray("data");
+
+                    if(!listMobil.isEmpty())
+                        listMobil.clear();
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        //Mengubah data jsonArray tertentu menjadi json Object
+                        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+                        int idMobil        = jsonObject.optInt("id");
+                        String nama_mobil  = jsonObject.optString("nama_mobil");
+                        int harga           = jsonObject.optInt("harga_sewa");
+                        int pemakaian          = jsonObject.optInt("durasi_pakai");
+                        String fasilitas    = jsonObject.optString("fasilitas");
+                        int penumpang           = jsonObject.optInt("kapasitas");
+                        String gambar       = jsonObject.optString("img_mobil");
+
+
+                        Mobil mobil = new Mobil(idMobil, nama_mobil, harga, pemakaian, fasilitas, penumpang, gambar);
+
+                        //Menambahkan objek user tadi ke list user
+                        listMobil.add(mobil);
+                    }
+                    adapter.notifyDataSetChanged();
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                Toast.makeText(view.getContext(), response.optString("message"),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                progressDialog.dismiss();
+                Toast.makeText(view.getContext(), error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
+    }
+
+    public void getMobilId(int id, int loop){
+        //Pendeklarasian queue
+        RequestQueue queue = Volley.newRequestQueue(view.getContext());
+
+        //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
+        //untuk request ini tidak memerlukan parameter
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(view.getContext());
+        progressDialog.setMessage("loading....");
+        progressDialog.setTitle("Menampilkan data mobil");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_MOBIL_BY_ID + id
+                , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+                progressDialog.dismiss();
+                try {
+                    //Mengambil data response json object yang berupa data mahasiswa
+                    JSONObject jsonObject = response.getJSONObject("data");
+
+                    int idMobil        = jsonObject.optInt("id");
+                    String nama_mobil  = jsonObject.optString("nama_mobil");
+                    int harga           = jsonObject.optInt("harga_sewa");
+                    int pemakaian          = jsonObject.optInt("durasi_pakai");
+                    String fasilitas    = jsonObject.optString("fasilitas");
+                    int penumpang           = jsonObject.optInt("kapasitas");
+                    String gambar       = jsonObject.optString("img_mobil");
+
+                    //Membuat objek Mobil
+                    Mobil mobil = new Mobil(idMobil, nama_mobil, harga, pemakaian, fasilitas, penumpang, gambar);
+
+                    //Menambahkan objek user tadi ke list user
+                    dataMobil.add(mobil);
+
+                    if(loop == checked.size()-1){
+                        //TODO 4.4(2,5)
+                        Bundle data = new Bundle();
+                        data.putSerializable("mobil", (Serializable) dataMobil);
+                        Navigation.findNavController(view).navigate(R.id.nav_checkout_mobil, data);
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                progressDialog.dismiss();
+                Toast.makeText(view.getContext(), error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
+    }
+}

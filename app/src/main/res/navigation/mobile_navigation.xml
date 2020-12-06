@@ -49,9 +49,9 @@
 
     <fragment
         android:id="@+id/nav_sewa_mobil"
-        android:name="com.kelompokd.pbp_uas_a_keld.fragments.SewaFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil.MobilFragment"
         android:label="Sewa"
-        tools:layout="@layout/fragment_sewa">
+        tools:layout="@layout/fragment_mobil">
         <action
             android:id="@+id/action_nav_sewa_mobil_to_nav_theme"
             app:destination="@id/nav_theme" />
@@ -105,7 +105,7 @@
 
     <fragment
         android:id="@+id/nav_checkout"
-        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CheckoutMobilFragment"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil.CheckoutMobilFragment"
         android:label="Checkout"
         tools:layout="@layout/fragment_checkout_mobil">
         <action
@@ -158,12 +158,38 @@
     <fragment
         android:id="@+id/nav_edit_pesanan_wisata"
         android:name="com.kelompokd.pbp_uas_a_keld.fragments.EditPesananWisata"
-        android:label="CheckoutWisata"
+        android:label="EditPesananWisata"
         tools:layout="@layout/fragment_edit_pesanan_wisata">
 
         <action
             android:id="@+id/action_nav_edit_pesanan_wisata_to_nav_lihatPesanan"
             app:popUpTo="@+id/nav_edit_pesanan_wisata"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_lihatPesanan" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_checkout_mobil"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil.CheckoutMobilFragment"
+        android:label="CheckoutMobil"
+        tools:layout="@layout/fragment_checkout_mobil">
+        <action
+            android:id="@+id/action_nav_checkout_mobil_to_nav_lihatPesanan"
+            app:popUpTo="@+id/nav_checkout_mobil"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_lihatPesanan" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_edit_sewa_mobil"
+        android:name="com.kelompokd.pbp_uas_a_keld.fragments.CRUDmobil.EditPesananMobil"
+        android:label="EditPesananMobil"
+        tools:layout="@layout/fragment_edit_sewa_mobil">
+
+        <action
+            android:id="@+id/action_nav_edit_sewa_mobil_to_nav_lihatPesanan"
+            app:popUpTo="@+id/nav_edit_sewa_mobil"
             app:popUpToInclusive="true"
             app:destination="@id/nav_lihatPesanan" />
 

@@ -1,11 +1,9 @@
 package com.kelompokd.pbp_uas_a_keld.adapter;
 
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,30 +12,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import com.google.android.material.card.MaterialCardView;
 import com.kelompokd.pbp_uas_a_keld.R;
-import com.kelompokd.pbp_uas_a_keld.model.Wisata;
+import com.kelompokd.pbp_uas_a_keld.model.Mobil;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterWisata extends RecyclerView.Adapter<AdapterWisata.adapterWisataViewHolder> {
+public class AdapterMobil extends RecyclerView.Adapter<AdapterMobil.adapterMobilViewHolder> {
 
-    private List<Wisata> wisataList;
-    private List<Wisata> wisataListFiltered;
+    private List<Mobil> mobilList;
+    private List<Mobil> mobilListFiltered;
     private Context context;
     private View view;
 
     //Membuat variabel penampung untuk title receipt yang "checked"
     public ArrayList<Integer> checked = new ArrayList<>();
 
-    public AdapterWisata(Context context, List<Wisata> wisataList) {
+    public AdapterMobil(Context context, List<Mobil> mobilList) {
         this.context            = context;
-        this.wisataList           = wisataList;
-        this.wisataListFiltered   = wisataList;
+        this.mobilList           = mobilList;
+        this.mobilListFiltered   = mobilList;
     }
 
     //Membuat fungsi yang mengembalikan list title receipt yang "checked"
@@ -47,27 +44,27 @@ public class AdapterWisata extends RecyclerView.Adapter<AdapterWisata.adapterWis
 
     @NonNull
     @Override
-    public AdapterWisata.adapterWisataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterMobil.adapterMobilViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        view = layoutInflater.inflate(R.layout.adapter_wisatalist, parent, false);
-        return new AdapterWisata.adapterWisataViewHolder(view);
+        view = layoutInflater.inflate(R.layout.adapter_mobillist, parent, false);
+        return new AdapterMobil.adapterMobilViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterWisata.adapterWisataViewHolder holder, int position) {
-        final Wisata wisata = wisataListFiltered.get(position);
+    public void onBindViewHolder(@NonNull AdapterMobil.adapterMobilViewHolder holder, int position) {
+        final Mobil mobil = mobilListFiltered.get(position);
 
         NumberFormat formatter = new DecimalFormat("#,###");
-        holder.txtWisata.setText(wisata.getWisata());
-        holder.txtHarga.setText("Rp "+ formatter.format(wisata.getHarga()));
-        holder.txtDurasi.setText(Integer.toString(wisata.getDurasi()));
-        holder.txtFasilitas.setText(wisata.getFasilitas());
-        holder.txtKuota.setText(Integer.toString(wisata.getKuota()));
+        holder.txtMobil.setText(mobil.getMobil());
+        holder.txtHarga.setText("Rp "+ formatter.format(mobil.getHarga()));
+        holder.txtPemakaian.setText(Integer.toString(mobil.getPemakaian()));
+        holder.txtFasilitas.setText(mobil.getFasilitas());
+        holder.txtPenumpang.setText(Integer.toString(mobil.getMax_penumpang()));
         Glide.with(context)
-                .load(wisata.getGambar())
+                .load(mobil.getGambar())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
-                .into(holder.iv_wisata);
+                .into(holder.iv_mobil);
 
         holder.itemCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,39 +80,39 @@ public class AdapterWisata extends RecyclerView.Adapter<AdapterWisata.adapterWis
 
     @Override
     public int getItemCount() {
-        return (wisataListFiltered != null) ? wisataListFiltered.size() : 0;
+        return (mobilListFiltered != null) ? mobilListFiltered.size() : 0;
     }
 
-    public class adapterWisataViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtWisata, txtHarga, txtDurasi, txtFasilitas, txtKuota;
-        private ImageView iv_wisata;
+    public class adapterMobilViewHolder extends RecyclerView.ViewHolder {
+        private TextView txtMobil, txtHarga, txtPemakaian, txtFasilitas, txtPenumpang;
+        private ImageView iv_mobil;
         private MaterialCardView itemCard;
 
-        public adapterWisataViewHolder(@NonNull View itemView) {
+        public adapterMobilViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtWisata         = itemView.findViewById(R.id.tvWisata);
+            txtMobil         = itemView.findViewById(R.id.tvMobil);
             txtHarga         = itemView.findViewById(R.id.tvHarga);
-            txtDurasi         = itemView.findViewById(R.id.tvDurasi);
+            txtPemakaian         = itemView.findViewById(R.id.tvPemakaian);
             txtFasilitas         = itemView.findViewById(R.id.tvFasilitas);
-            txtKuota         = itemView.findViewById(R.id.tvKuota);
-            iv_wisata        = itemView.findViewById(R.id.iv_wisata);
+            txtPenumpang         = itemView.findViewById(R.id.tvPenumpang);
+            iv_mobil        = itemView.findViewById(R.id.iv_mobil);
 
             itemCard = itemView.findViewById(R.id.item_card);
         }
     }
     //Membuat fungsi untuk menambahkan title receipt yang checked dan menghapus yang unchecked
-    public void addRemoveJenis(final adapterWisataViewHolder holder, final int i, View v){
-        int idWisata;
+    public void addRemoveJenis(final adapterMobilViewHolder holder, final int i, View v){
+        int idMobil;
 
-        idWisata = wisataList.get(i).getIdWisata();
+        idMobil = mobilList.get(i).getIdMobil();
 
 
         if(holder.itemCard.isChecked()){
             //Menambahkan objek user tadi ke list user
-            checked.add(idWisata);
+            checked.add(idMobil);
         }
         else if(!holder.itemCard.isChecked()){
-            checked.remove(checked.indexOf(idWisata));
+            checked.remove(checked.indexOf(idMobil));
         }
     }
 }

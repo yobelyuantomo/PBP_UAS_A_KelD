@@ -35,24 +35,38 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
 import com.kelompokd.pbp_uas_a_keld.DashboardActivity;
 import com.kelompokd.pbp_uas_a_keld.LoginActivity;
 import com.kelompokd.pbp_uas_a_keld.R;
+import com.kelompokd.pbp_uas_a_keld.model.Mobil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import static com.android.volley.Request.Method.GET;
 
 public class AccountFragment extends Fragment {
 
@@ -74,6 +88,9 @@ public class AccountFragment extends Fragment {
     public final static String TAG_EMAIL = "email";
     public final static String TAG_ALAMAT = "alamat";
 
+    public View root;
+    MaterialTextView tv_name, tv_tgl_lahir, tv_jenisKelamin, tv_email, tv_alamat, editProfile;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +99,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_account, container, false);
+        root = inflater.inflate(R.layout.fragment_account, container, false);
 
         //Ambil data user dari data yang disimpan pada sharedpreferences
         sharedpreferences = getActivity().getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
@@ -136,7 +153,90 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        ///////////////////////////////////////////////////////////////////////////
+        init();
+        ///////////////////////////////////////////////////////////////////////////
         return root;
+    }
+
+    public void init(){
+        tv_name = root.findViewById(R.id.tv_name);
+        tv_tgl_lahir = root.findViewById(R.id.tv_tgl_lahir);
+        tv_jenisKelamin = root.findViewById(R.id.tv_jenisKelamin);
+        tv_email = root.findViewById(R.id.tv_email);
+        tv_alamat = root.findViewById(R.id.tv_alamat);
+        editProfile = root.findViewById(R.id.editProfile);
+
+        getCurrentUser(Integer.parseInt(id));
+    }
+
+    public void getCurrentUser(int id){
+        //Pendeklarasian queue
+        RequestQueue queue = Volley.newRequestQueue(root.getContext());
+
+        //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
+        //untuk request ini tidak memerlukan parameter
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(root.getContext());
+        progressDialog.setMessage("loading....");
+        progressDialog.setTitle("Menampilkan data akun");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_USER + id
+                , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+                progressDialog.dismiss();
+                try {
+                    //Mengambil data response json object yang berupa data mahasiswa
+                    JSONObject jsonObject = response.getJSONObject("data");
+
+                    int idUser        = jsonObject.optInt("id");
+                    String full_name  = jsonObject.optString("full_name");
+                    String email           = jsonObject.optString("email");
+                    String tanggal_lahir           = jsonObject.optString("tanggal_lahir");
+                    String jenis_kelamin           = jsonObject.optString("jenis_kelamin");
+                    String alamat           = jsonObject.optString("alamat");
+
+                    tv_name.setText(full_name);
+                    tv_email.setText(email);
+                    tv_tgl_lahir.setText(tanggal_lahir);
+                    tv_jenisKelamin.setText(jenis_kelamin);
+                    tv_alamat.setText(alamat);
+
+                    Bundle data = new Bundle();
+                    data.putInt("dataId", idUser);
+                    data.putString("dataNama", full_name);
+                    data.putString("dataEmail", email);
+                    data.putString("dataTglLahir", tanggal_lahir);
+                    data.putString("dataJK", jenis_kelamin);
+                    data.putString("dataAlamat", alamat);
+
+                    editProfile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Navigation.findNavController(root).navigate(R.id.nav_editProfile, data);
+                        }
+                    });
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                progressDialog.dismiss();
+                Toast.makeText(root.getContext(), error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
     }
 
     // Fungsi ini akan menjalankan alert dialog untuk memilih mau lewat kamera atau external storage

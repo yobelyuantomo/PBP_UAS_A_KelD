@@ -31,7 +31,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.kelompokd.pbp_uas_a_keld.API.MorentAPI;
 import com.kelompokd.pbp_uas_a_keld.R;
 import com.kelompokd.pbp_uas_a_keld.model.Pesanan;
-import com.kelompokd.pbp_uas_a_keld.model.Wisata;
+import com.kelompokd.pbp_uas_a_keld.model.Mobil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,23 +44,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.volley.Request.Method.DELETE;
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
 
-public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterPesananViewHolder> {
+public class AdapterSewaMobil extends RecyclerView.Adapter<AdapterSewaMobil.adapterPesananViewHolder> {
 
     private List<Pesanan> pesananList;
     private List<Pesanan> pesananListFiltered;
-    private List<Wisata> dataWisata = new ArrayList<>();
+    private List<Mobil> dataMobil = new ArrayList<>();
     private Context context;
     private View view;
-    private AdapterPesanan.deleteItemListener mListener;
+    private AdapterSewaMobil.deleteItemListener mListener;
 
     SimpleDateFormat dateFormatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm");
 
-    public AdapterPesanan(Context context, List<Pesanan> pesananList,
-                          AdapterPesanan.deleteItemListener mListener) {
+    public AdapterSewaMobil(Context context, List<Pesanan> pesananList,
+                            AdapterSewaMobil.deleteItemListener mListener) {
         this.context            = context;
         this.pesananList           = pesananList;
         this.pesananListFiltered   = pesananList;
@@ -73,14 +72,14 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
 
     @NonNull
     @Override
-    public AdapterPesanan.adapterPesananViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterSewaMobil.adapterPesananViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         view = layoutInflater.inflate(R.layout.adapter_pesanan, parent, false);
-        return new AdapterPesanan.adapterPesananViewHolder(view);
+        return new AdapterSewaMobil.adapterPesananViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPesanan.adapterPesananViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterSewaMobil.adapterPesananViewHolder holder, int position) {
         final Pesanan pesanan = pesananListFiltered.get(position);
 
         NumberFormat formatter = new DecimalFormat("#,###");
@@ -113,7 +112,7 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
         holder.editItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getWisataNama(pesanan.getPesanan(), pesanan);
+                getMobilNama(pesanan.getPesanan(), pesanan);
             }
         });
     }
@@ -171,7 +170,7 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("loading....");
         progressDialog.setTitle("Menghapus data pesanan");
-        progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
         //Memulai membuat permintaan request menghapus data ke jaringan
@@ -209,7 +208,7 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
         queue.add(stringRequest);
     }
 
-    public void getWisataNama(String nama, Pesanan pesanan){
+    public void getMobilNama(String nama, Pesanan pesanan){
         //Pendeklarasian queue
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
 
@@ -218,11 +217,11 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(view.getContext());
         progressDialog.setMessage("loading....");
-        progressDialog.setTitle("Menampilkan paket wisata");
-        progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Menampilkan paket mobil");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_WISATA_BY_NAME + nama
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MorentAPI.URL_SHOW_MOBIL_BY_NAME + nama
                 , null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -236,26 +235,26 @@ public class AdapterPesanan extends RecyclerView.Adapter<AdapterPesanan.adapterP
                         //Mengubah data jsonArray tertentu menjadi json Object
                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
-                        int idWisata        = jsonObject.optInt("id");
-                        String nama_wisata  = jsonObject.optString("nama_wisata");
-                        int harga           = jsonObject.optInt("harga");
-                        int durasi          = jsonObject.optInt("durasi");
+                        int idMobil        = jsonObject.optInt("id");
+                        String nama_mobil  = jsonObject.optString("nama_mobil");
+                        int harga           = jsonObject.optInt("harga_sewa");
+                        int pemakaian          = jsonObject.optInt("durasi_pakai");
                         String fasilitas    = jsonObject.optString("fasilitas");
-                        int kuota           = jsonObject.optInt("kuota");
-                        String gambar       = jsonObject.optString("img_wisata");
+                        int penumpang           = jsonObject.optInt("kapasitas");
+                        String gambar       = jsonObject.optString("img_mobil");
 
-                        //Membuat objek Wisata
-                        Wisata wisata = new Wisata(idWisata, nama_wisata, harga, durasi, fasilitas, kuota, gambar);
+                        //Membuat objek Mobil
+                        Mobil mobil = new Mobil(idMobil, nama_mobil, harga, pemakaian, fasilitas, penumpang, gambar);
 
                         //Menambahkan objek user tadi ke list user
-                        dataWisata.add(wisata);
+                        dataMobil.add(mobil);
                     }
 
                     if(jsonArray.length() > 0){
                         Bundle data = new Bundle();
                         data.putSerializable("pesanan", (Serializable) pesanan);
-                        data.putSerializable("dataWisata", (Serializable) dataWisata);
-                        Navigation.findNavController(view).navigate(R.id.nav_edit_pesanan_wisata, data);
+                        data.putSerializable("dataMobil", (Serializable) dataMobil);
+                        Navigation.findNavController(view).navigate(R.id.nav_edit_sewa_mobil, data);
                     }
 
                 }catch (JSONException e){
